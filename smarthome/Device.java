@@ -17,35 +17,49 @@ public abstract class Device implements Runnable {
 
     public void turnOn() {
         status = "ON";
-        new DeviceDAO().updateDeviceStatus(this);
-        new DeviceDAO().logDeviceStatus(this);
-        System.out.println(name + " turned ON.");
+        try {
+            // Removed updateDeviceStatus and logDeviceStatus
+            System.out.println(name + " turned ON.");
+        } catch (Exception e) {
+            System.out.println("Failed to turn on device: " + e.getMessage());
+        }
     }
 
     public void turnOff() {
         status = "OFF";
-        new DeviceDAO().updateDeviceStatus(this);
-        new DeviceDAO().logDeviceStatus(this);
-        System.out.println(name + " turned OFF.");
+        try {
+            // Removed updateDeviceStatus and logDeviceStatus
+            System.out.println(name + " turned OFF.");
+        } catch (Exception e) {
+            System.out.println("Failed to turn off device: " + e.getMessage());
+        }
     }
 
     public void updateStatus(String newStatus) {
-        status = newStatus;
+        this.status = newStatus;
         System.out.println(name + " status updated to " + newStatus);
     }
 
     public String getStatus() {
         return status;
     }
+
     public String getDeviceId() {
         return deviceId;
     }
+
     public String getName() {
         return name;
     }
 
     public String getType() {
-        return type; // This is what fixes the issue
+        return type;
     }
-    public abstract void run();
+
+    public String getLocation() {
+        return location;
+    }
+
+    @Override
+    public abstract void run(); // must be implemented in subclass
 }

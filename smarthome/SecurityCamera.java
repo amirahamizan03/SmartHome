@@ -17,6 +17,7 @@ public class SecurityCamera extends Device {
         try {
             recording = true;
             turnOn(); // inherited from Device
+            new DeviceDAO().logAction(this, "Start Recording", "-");
             System.out.println(name + " started recording.");
         } finally {
             lock.unlock();
@@ -28,6 +29,7 @@ public class SecurityCamera extends Device {
         try {
             recording = false;
             turnOff(); // inherited from Device
+            new DeviceDAO().logAction(this, "Stop Recording", "-");
             System.out.println(name + " stopped recording.");
         } finally {
             lock.unlock();

@@ -21,6 +21,7 @@ public class Thermostat extends Device {
         lock.lock();
         try {
             turnOn(); // Use method from Device class
+            new DeviceDAO().logAction(this, "Activate Thermostat", "-");
             System.out.println(name + " is ON.");
         } finally {
             lock.unlock();
@@ -31,6 +32,7 @@ public class Thermostat extends Device {
         lock.lock();
         try {
             turnOff(); // Use method from Device class
+            new DeviceDAO().logAction(this, "Deactivate Thermostat", "-");
             System.out.println(name + " is OFF.");
         } finally {
             lock.unlock();
